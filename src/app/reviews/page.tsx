@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ChevronRight, PlayCircle, Star } from "lucide-react";
+import { ChevronRight, PlayCircle } from "lucide-react";
 import ReviewsClient from "@/components/ReviewsClient";
 import ScrollReveal from "@/components/ScrollReveal";
 import { AnimatedHeroRating, AnimatedProgressBars } from "@/components/AnimatedReviewsStats";

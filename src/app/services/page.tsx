@@ -1,7 +1,6 @@
 import ServicesClient from "@/components/ServicesClient";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
-import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata = {
   title: "Diagnostic Services & Health Packages | SBR Diagnostic Center",
