@@ -11,6 +11,13 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        medical: {
+          blue: "#0a3d62",
+          light: "#1e6899",
+        },
+        accent: {
+          green: "#27ae60",
+        }
       },
     },
   },
