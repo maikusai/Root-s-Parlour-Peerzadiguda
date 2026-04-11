@@ -12,6 +12,7 @@ import {
   Users,
   BadgeIndianRupee
 } from "lucide-react";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export default function HomePage() {
   const phoneNumber = "+919849190189";
@@ -67,6 +68,7 @@ export default function HomePage() {
 
       {/* --- SERVICES HIGHLIGHTS STRIP --- */}
       <section id="services" className="py-12 bg-slate-50 border-b border-slate-200">
+        <ScrollReveal>
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-bold text-medical-blue">Our Services</h2>
@@ -95,10 +97,12 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+        </ScrollReveal>
       </section>
 
       {/* --- WHY CHOOSE SBR --- */}
       <section id="about" className="py-16 bg-white">
+        <ScrollReveal delay={0.1}>
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 className="text-3xl font-bold text-medical-blue mb-4">Why Choose SBR Diagnostic</h2>
@@ -149,10 +153,12 @@ export default function HomePage() {
             </cite>
           </div>
         </div>
+        </ScrollReveal>
       </section>
 
       {/* --- HEALTH PACKAGES PREVIEW --- */}
       <section id="packages" className="py-16 bg-slate-50">
+        <ScrollReveal delay={0.1}>
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 className="text-3xl font-bold text-medical-blue mb-4">Popular Health Packages</h2>
@@ -212,10 +218,12 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+        </ScrollReveal>
       </section>
 
       {/* --- APPOINTMENT CTA BANNER --- */}
       <section className="py-12 bg-medical-blue relative overflow-hidden">
+        <ScrollReveal delay={0.1}>
         <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://images.unsplash.com/photo-1584900124976-1a7f0eebcce2?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center"></div>
         <div className="container mx-auto px-4 relative z-10 flex flex-col md:flex-row items-center justify-between text-white text-center md:text-left gap-6">
           <div>
@@ -241,10 +249,12 @@ export default function HomePage() {
             </a>
           </div>
         </div>
+        </ScrollReveal>
       </section>
 
       {/* --- LOCATION SNEAK PEEK --- */}
       <section id="contact" className="py-16 bg-white">
+        <ScrollReveal delay={0.2}>
         <div className="container mx-auto px-4 flex flex-col md:flex-row gap-10 items-center">
           <div className="flex-1 w-full order-2 md:order-1">
             {/* Map Placeholder */}
@@ -308,6 +318,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+        </ScrollReveal>
       </section>
       
       {/* Spacer for bottom mobile action buttons to prevent overlap */}

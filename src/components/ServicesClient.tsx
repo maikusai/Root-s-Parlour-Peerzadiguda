@@ -53,7 +53,8 @@ export default function ServicesClient() {
   ];
 
   const phoneNumber = "+919849190189";
-  const message = encodeURIComponent("Hello, I would like to enquire about a test/package from your website.");
+  const waLink = (name: string) =>
+    `https://wa.me/${phoneNumber}?text=${encodeURIComponent(`Hello, I would like to enquire about *${name}* from SBR Diagnostic Center. Please share more details.`)}`;
 
   return (
     <div className="w-full">
@@ -96,7 +97,7 @@ export default function ServicesClient() {
                   <span className="bg-accent-green/10 text-accent-green px-3 py-1 rounded-lg font-bold text-sm">
                     {service.price}
                   </span>
-                  <a href={`https://wa.me/${phoneNumber}?text=${message}`} target="_blank" rel="noopener noreferrer" className="text-medical-blue font-bold px-4 py-2 border border-medical-blue rounded-lg hover:bg-medical-blue hover:text-white transition-colors text-sm">
+                  <a href={waLink(service.name)} target="_blank" rel="noopener noreferrer" className="text-medical-blue font-bold px-4 py-2 border border-medical-blue rounded-lg hover:bg-medical-blue hover:text-white transition-colors text-sm">
                     Enquire
                   </a>
                 </div>
@@ -123,7 +124,7 @@ export default function ServicesClient() {
                   <span className="bg-accent-green/10 text-accent-green px-3 py-1 rounded-lg font-bold text-sm">
                      {service.price}
                   </span>
-                  <a href={`https://wa.me/${phoneNumber}?text=${message}`} target="_blank" rel="noopener noreferrer" className="text-medical-blue font-bold px-4 py-2 border border-medical-blue rounded-lg hover:bg-medical-blue hover:text-white transition-colors text-sm">
+                  <a href={waLink(service.name)} target="_blank" rel="noopener noreferrer" className="text-medical-blue font-bold px-4 py-2 border border-medical-blue rounded-lg hover:bg-medical-blue hover:text-white transition-colors text-sm">
                     Enquire
                   </a>
                 </div>
@@ -156,7 +157,7 @@ export default function ServicesClient() {
                     </li>
                   ))}
                 </ul>
-                <a href={`https://wa.me/${phoneNumber}?text=${message}`} target="_blank" rel="noopener noreferrer" className="w-full block text-center py-3 rounded-xl font-bold transition-colors bg-medical-blue text-white hover:bg-medical-light relative z-10">
+                <a href={waLink(pkg.title)} target="_blank" rel="noopener noreferrer" className="w-full block text-center py-3 rounded-xl font-bold transition-colors bg-medical-blue text-white hover:bg-medical-light relative z-10">
                   Book This Package
                 </a>
               </div>

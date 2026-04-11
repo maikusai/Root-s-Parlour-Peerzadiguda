@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ChevronRight, PlayCircle, Star } from "lucide-react";
 import ReviewsClient from "@/components/ReviewsClient";
+import ScrollReveal from "@/components/ScrollReveal";
+import { AnimatedHeroRating, AnimatedProgressBars } from "@/components/AnimatedReviewsStats";
 
 export const metadata = {
   title: "Patient Reviews | SBR Diagnostic Center",
@@ -23,18 +25,7 @@ export default function ReviewsPage() {
           
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">What Our Patients Say</h1>
           
-          <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-3xl inline-flex flex-col items-center">
-            <div className="flex gap-2 mb-2">
-              {[...Array(5)].map((_, i) => (
-                 <Star key={i} className={`w-8 h-8 ${i < 5 ? 'fill-yellow-400 text-yellow-400' : 'fill-slate-100 text-slate-200'}`} />
-              ))}
-            </div>
-            <div className="text-white font-bold text-lg">
-               <span className="text-3xl text-yellow-400 mr-2">4.7/5</span> 
-               overall rating
-            </div>
-            <p className="text-blue-100 text-sm mt-1">Based on 120+ verified Google Reviews</p>
-          </div>
+          <AnimatedHeroRating />
           
           <p className="text-lg text-blue-100 max-w-2xl mt-8">
             Trusted by thousands of families in Peerzadiguda, Maruthi Nagar, and Viharika Colony.
@@ -52,24 +43,7 @@ export default function ReviewsPage() {
               <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                  <h3 className="text-xl font-bold text-slate-800 mb-6">Rating Breakdown</h3>
                  
-                 <div className="space-y-4 mb-8">
-                   {[
-                     { stars: 5, pct: 70 },
-                     { stars: 4, pct: 20 },
-                     { stars: 3, pct: 7 },
-                     { stars: 2, pct: 2 },
-                     { stars: 1, pct: 1 },
-                   ].map((bar) => (
-                      <div key={bar.stars} className="flex items-center gap-3">
-                         <span className="text-sm font-bold text-slate-600 w-4">{bar.stars}</span>
-                         <Star className="w-4 h-4 fill-slate-300 text-slate-300" />
-                         <div className="flex-1 h-3 bg-slate-100 rounded-full overflow-hidden">
-                            <div className="h-full bg-yellow-400 rounded-full" style={{ width: `${bar.pct}%` }}></div>
-                         </div>
-                         <span className="text-xs font-bold text-slate-400 w-8 text-right">{bar.pct}%</span>
-                      </div>
-                   ))}
-                 </div>
+                 <AnimatedProgressBars />
                  
                  <div className="w-full h-px bg-slate-100 mb-6"></div>
 
@@ -111,7 +85,9 @@ export default function ReviewsPage() {
 
            {/* Right Column: Reviews Client */}
            <div className="lg:w-2/3">
-             <ReviewsClient />
+             <ScrollReveal delay={0.2}>
+               <ReviewsClient />
+             </ScrollReveal>
            </div>
 
         </div>

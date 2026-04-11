@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ChevronRight, Target, HeartHandshake, ShieldCheck, CheckCircle2 } from "lucide-react";
 import AnimatedCounters from "@/components/AnimatedCounters";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata = {
   title: "About Us | SBR Diagnostic Center",
@@ -65,18 +66,45 @@ export default function AboutPage() {
 
       {/* Our Story */}
       <section className="py-16 bg-white">
+        <ScrollReveal>
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center space-y-6">
-            <h2 className="text-3xl font-bold text-medical-blue">Our Story</h2>
-            <p className="text-slate-600 leading-relaxed text-lg text-justify md:text-center">
-              SBR Diagnostic Center has been proudly serving the residents of Peerzadiguda and the surrounding areas of Maruthi Nagar and Viharika Colony for years. Our mission is direct and profound: to bring accurate, affordable diagnostics to every household in our neighbourhood. We believe that critical health decisions start with precise lab results, which is why we continuously invest in cutting-edge equipment and a highly trained medical staff.
-            </p>
+          <div className="max-w-3xl mx-auto">
+            {/* Section heading */}
+            <div className="flex flex-col items-center text-center mb-10">
+              <div className="w-12 h-1 bg-medical-blue rounded-full mb-4"></div>
+              <h2 className="text-3xl font-bold text-medical-blue">Our Story</h2>
+              <p className="text-slate-500 mt-2 text-sm uppercase tracking-widest font-medium">Serving Peerzadiguda since 2009</p>
+            </div>
+
+            {/* Story cards - mobile friendly grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-slate-50 border border-slate-100 rounded-2xl p-6 flex flex-col gap-3">
+                <div className="w-10 h-10 rounded-full bg-medical-blue/10 flex items-center justify-center mb-1">
+                  <span className="text-xl">🏥</span>
+                </div>
+                <h3 className="font-bold text-slate-800 text-lg">Who We Are</h3>
+                <p className="text-slate-600 leading-relaxed text-sm">
+                  SBR Diagnostic Center has been proudly serving the residents of Peerzadiguda, Maruthi Nagar, and Viharika Colony for over 15 years — becoming a trusted name for accurate, affordable healthcare diagnostics.
+                </p>
+              </div>
+              <div className="bg-slate-50 border border-slate-100 rounded-2xl p-6 flex flex-col gap-3">
+                <div className="w-10 h-10 rounded-full bg-accent-green/10 flex items-center justify-center mb-1">
+                  <span className="text-xl">🎯</span>
+                </div>
+                <h3 className="font-bold text-slate-800 text-lg">Our Mission</h3>
+                <p className="text-slate-600 leading-relaxed text-sm">
+                  Our mission is clear: bring world-class diagnostic precision to every neighbourhood household. We continuously invest in cutting-edge equipment and a highly trained medical staff so that critical health decisions start with precise results.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
+        </ScrollReveal>
       </section>
 
       {/* Our Mission & Values */}
       <section className="py-16 bg-slate-50 border-y border-slate-200">
+        <ScrollReveal delay={0.2}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-medical-blue">Our Mission & Values</h2>
@@ -106,6 +134,7 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
+        </ScrollReveal>
       </section>
 
       {/* Certifications & Accreditations (Banner) */}
@@ -132,6 +161,7 @@ export default function AboutPage() {
 
       {/* Our Team */}
       <section className="py-16 bg-white">
+        <ScrollReveal delay={0.1}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-medical-blue mb-4">Meet Our Team</h2>
@@ -155,6 +185,7 @@ export default function AboutPage() {
              <p className="text-slate-700 text-sm font-medium">💡 <span className="font-bold">Did you know?</span> Ask us about our visiting specialist consultations to discuss your reports directly with experts.</p>
           </div>
         </div>
+        </ScrollReveal>
       </section>
 
       {/* By the Numbers (Animated Counters) */}
@@ -166,6 +197,7 @@ export default function AboutPage() {
 
       {/* Facility Photos (Masonry CSS Column-count) */}
       <section className="py-16 bg-white">
+        <ScrollReveal delay={0.2}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-medical-blue mb-4">Our Facility</h2>
@@ -184,6 +216,7 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
+        </ScrollReveal>
       </section>
     </div>
   );

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ChevronRight, ExternalLink } from "lucide-react";
 import GalleryClient from "@/components/GalleryClient";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata = {
   title: "Photo Gallery | SBR Diagnostic Center",
@@ -33,11 +34,14 @@ export default function GalleryPage() {
 
       {/* Main Dynamic Gallery Wrapper */}
       <div className="container mx-auto px-4 -mt-10 relative z-20">
+         <ScrollReveal delay={0.1}>
          <div className="bg-white rounded-3xl p-6 md:p-10 shadow-lg border border-slate-100 min-h-[500px]">
             <GalleryClient />
          </div>
+         </ScrollReveal>
 
          {/* 360 Virtual Tour Placeholder Layer */}
+         <ScrollReveal delay={0.2}>
          <div className="mt-16 bg-medical-blue text-white rounded-3xl overflow-hidden shadow-xl flex flex-col md:flex-row relative">
             <div className="p-10 md:w-1/2 flex flex-col justify-center">
                <h2 className="text-3xl font-bold mb-4">Virtual Tour</h2>
@@ -60,6 +64,7 @@ export default function GalleryPage() {
                </div>
             </div>
          </div>
+         </ScrollReveal>
          
       </div>
 
