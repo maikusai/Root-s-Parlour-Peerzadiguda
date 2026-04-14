@@ -127,21 +127,21 @@ export default function GalleryClient() {
        {/* Custom Lightbox */}
        {selectedPhoto && (
          <div 
-           className="fixed inset-0 z-[999] flex items-center justify-center bg-salon-black/95 backdrop-blur-md p-4 transition-opacity animate-in fade-in duration-300"
+           className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-salon-black/95 backdrop-blur-md px-4 pt-24 md:pt-32 pb-6 transition-opacity animate-in fade-in duration-300"
            onClick={() => setSelectedPhoto(null)}
          >
            <button 
-             className="absolute top-[85px] right-6 md:right-8 text-salon-gold hover:text-salon-cream transition-colors p-2 z-[60]"
+             className="absolute top-[90px] md:top-[110px] right-6 md:right-8 text-salon-gold hover:text-salon-cream transition-colors p-2 z-[60]"
              onClick={() => setSelectedPhoto(null)}
            >
              <Scissors className="w-7 h-7" strokeWidth={1.5} />
            </button>
            
            <div 
-             className="relative w-full max-w-4xl max-h-[80vh] flex flex-col items-center animate-in zoom-in-95 duration-300 mt-12 md:mt-6"
+             className="relative w-full max-w-xs sm:max-w-md md:max-w-3xl lg:max-w-5xl flex flex-col items-center animate-in zoom-in-95 duration-300"
              onClick={(e) => e.stopPropagation()}
            >
-             <div className="w-full aspect-[4/3] rounded-sm shadow-2xl border border-salon-gold/20 relative overflow-hidden bg-salon-surface">
+             <div className="w-full h-[45vh] md:h-[55vh] rounded-sm shadow-2xl border border-salon-gold/20 relative overflow-hidden bg-salon-surface">
                <AnimatePresence initial={false} custom={direction}>
                  <motion.div
                    key={selectedPhoto.id}
@@ -165,18 +165,18 @@ export default function GalleryClient() {
                 <h3 className="text-3xl font-heading text-salon-cream mb-6">{selectedPhoto.title}</h3>
                 
                 {/* Navigation Buttons placed right below the text title */}
-                <div className="flex items-center gap-6 mt-2">
+                <div className="flex items-center gap-6 mt-0 md:mt-2">
                    <button 
                      onClick={handlePrev} 
-                     className="p-3 border border-salon-gold text-salon-gold rounded-full hover:bg-salon-gold hover:text-salon-black transition-colors"
+                     className="p-2.5 md:p-3 border border-salon-gold text-salon-gold rounded-full hover:bg-salon-gold hover:text-salon-black transition-colors"
                    >
-                     <ChevronLeft className="w-6 h-6" />
+                     <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
                    </button>
                    <button 
                      onClick={handleNext} 
-                     className="p-3 border border-salon-gold text-salon-gold rounded-full hover:bg-salon-gold hover:text-salon-black transition-colors"
+                     className="p-2.5 md:p-3 border border-salon-gold text-salon-gold rounded-full hover:bg-salon-gold hover:text-salon-black transition-colors"
                    >
-                     <ChevronRight className="w-6 h-6" />
+                     <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
                    </button>
                 </div>
              </div>
