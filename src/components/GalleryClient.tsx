@@ -24,7 +24,7 @@ const galleryData = [
 
 export default function GalleryClient() {
   const [activeTab, setActiveTab] = useState("All");
-  const [selectedPhoto, setSelectedPhoto] = useState<any>(null);
+  const [selectedPhoto, setSelectedPhoto] = useState<{id: number, category: string, title: string, color: string} | null>(null);
   const [direction, setDirection] = useState(0);
 
   const filteredPhotos = activeTab === "All" ? galleryData : galleryData.filter(img => img.category === activeTab);
@@ -112,7 +112,7 @@ export default function GalleryClient() {
                  className={`break-inside-avoid rounded-sm overflow-hidden border border-salon-gold/10 shadow-sm hover:shadow-[0_8px_30px_rgba(201,168,76,0.15)] hover:border-salon-gold/40 transition-all cursor-pointer group relative h-64 md:h-80 w-full flex items-center justify-center ${photo.color}`}
                >
                  {/* Placeholder Content */}
-                 <span className="text-salon-gold/20 font-heading text-4xl uppercase tracking-widest opacity-30 select-none rotate-[-45deg] whitespace-nowrap">ROOT'S</span>
+                 <span className="text-salon-gold/20 font-heading text-4xl uppercase tracking-widest opacity-30 select-none rotate-[-45deg] whitespace-nowrap">ROOT&apos;S</span>
 
                  {/* Hover Overlay */}
                  <div className="absolute inset-0 bg-gradient-to-t from-salon-black via-salon-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
@@ -153,7 +153,7 @@ export default function GalleryClient() {
                    transition={{ x: { type: "spring", stiffness: 350, damping: 35 }, opacity: { duration: 0.2 } }}
                    className={`absolute inset-0 flex items-center justify-center ${selectedPhoto.color}`}
                  >
-                   <span className="text-salon-gold/20 font-heading text-6xl md:text-8xl uppercase tracking-widest select-none drop-shadow-2xl opacity-40 rotate-[-20deg]">ROOT'S SALON</span>
+                   <span className="text-salon-gold/20 font-heading text-6xl md:text-8xl uppercase tracking-widest select-none drop-shadow-2xl opacity-40 rotate-[-20deg]">ROOT&apos;S SALON</span>
                  </motion.div>
                </AnimatePresence>
              </div>

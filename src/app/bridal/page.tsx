@@ -131,7 +131,7 @@ export default function BridalPage() {
             <div className="bg-[#0D0D1A] p-10 md:p-16 border border-salon-gold/10 rounded-sm relative">
                <Heart className="absolute top-8 right-8 w-12 h-12 text-salon-gold/10" />
                <p className="text-xl md:text-2xl font-heading text-salon-cream leading-relaxed font-light italic mb-8 relative z-10">
-                 "The team at Root's made me feel like absolute royalty on my wedding day. The HD makeup stayed flawless through all the rituals, and the pre-bridal skin sessions gave me a natural, undeniable glow. I cannot recommend them enough to brides inside and outside Hyderabad!"
+                 &quot;The team at Root&apos;s made me feel like absolute royalty on my wedding day. The HD makeup stayed flawless through all the rituals, and the pre-bridal skin sessions gave me a natural, undeniable glow. I cannot recommend them enough to brides inside and outside Hyderabad!&quot;
                </p>
                <div className="flex items-center gap-4 relative z-10">
                   <div className="w-14 h-14 bg-salon-surface rounded-full border border-salon-gold/30 flex items-center justify-center p-1 overflow-hidden">

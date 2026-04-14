@@ -80,6 +80,7 @@ export default function ServicesClient() {
     if (Object.keys(servicesData).includes(hash)) {
       setActiveTab(hash);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

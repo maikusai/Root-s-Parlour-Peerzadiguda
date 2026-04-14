@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Phone, MapPin, Clock, Star, MessageCircle } from "lucide-react";
+import { MapPin, Clock, Star, MessageCircle } from "lucide-react";
 
 export default function Footer() {
   const phoneNumber = "+919182637770";
@@ -17,7 +17,7 @@ export default function Footer() {
             </div>
             <div>
               <h2 className="font-heading text-2xl text-salon-cream leading-none tracking-wide">
-                Root's
+                Root&apos;s
               </h2>
               <p className="text-[10px] text-salon-gold tracking-widest uppercase font-bold mt-1">
                 The Family Salon
@@ -96,7 +96,7 @@ export default function Footer() {
       </div>
       
       <div className="container mx-auto px-4 mt-8 pt-2 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-light text-salon-muted/60 tracking-wider">
-        <p>&copy; {new Date().getFullYear()} Root's the Family Salon. All Rights Reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Root&apos;s the Family Salon. All Rights Reserved.</p>
         <p>Designed by <span className="text-salon-gold">Micus</span></p>
       </div>
     </footer>

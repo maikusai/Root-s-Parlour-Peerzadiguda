@@ -62,7 +62,7 @@ export default function ReviewsClient() {
               </div>
               
               <p className="text-salon-cream font-light text-sm leading-relaxed mb-8 flex-grow italic">
-                "{review.text}"
+                &quot;{review.text}&quot;
               </p>
 
               <div className="flex justify-between items-end border-t border-salon-gold/10 pt-4">
@@ -90,7 +90,7 @@ export default function ReviewsClient() {
          <div className="relative z-10">
             <h2 className="text-3xl font-heading text-salon-gold mb-3">Leave a Review</h2>
             <p className="text-salon-cream font-light text-sm mb-10 max-w-md mx-auto">
-               Loved your transformation? We'd be honored if you shared your experience with the world.
+               Loved your transformation? We&apos;d be honored if you shared your experience with the world.
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center gap-4">

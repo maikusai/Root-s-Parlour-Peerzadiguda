@@ -37,7 +37,7 @@ export default function ReviewsPage() {
             </div>
 
             <p className="text-base md:text-lg text-salon-muted max-w-2xl leading-relaxed font-light tracking-wide px-4">
-               Real stories from real transformations. See why we're Peerzadiguda's most trusted premium salon experience.
+               Real stories from real transformations. See why we&apos;re Peerzadiguda&apos;s most trusted premium salon experience.
             </p>
          </div>
       </section>

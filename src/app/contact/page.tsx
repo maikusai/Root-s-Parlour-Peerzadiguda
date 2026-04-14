@@ -29,7 +29,7 @@ export default function ContactPage() {
                Get In Touch
             </h1>
             <p className="text-base md:text-lg text-salon-muted max-w-2xl leading-relaxed font-light tracking-wide px-4">
-               Have a question about our services or ready to book your next session? Reach out to us, and we'll be happy to assist you.
+               Have a question about our services or ready to book your next session? Reach out to us, and we&apos;ll be happy to assist you.
             </p>
          </div>
       </section>

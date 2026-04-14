@@ -52,7 +52,7 @@ export default function AboutPage() {
                </div>
                <h2 className="text-3xl font-heading text-salon-gold mb-8">The Beginning</h2>
                <p className="text-base md:text-2xl text-salon-cream font-light leading-relaxed tracking-wide italic font-heading relative z-10 line-clamp-none">
-                 "Root's was born in 2018 in the heart of Peerzadiguda with a single mission: to bring premium salon services to every family in the neighbourhood. Over the years, we have served 1,500+ happy clients and grown into Hyderabad's most trusted unisex family salon."
+                 &quot;Root&apos;s was born in 2018 in the heart of Peerzadiguda with a single mission: to bring premium salon services to every family in the neighbourhood. Over the years, we have served 1,500+ happy clients and grown into Hyderabad&apos;s most trusted unisex family salon.&quot;
                </p>
             </div>
          </ScrollReveal>
