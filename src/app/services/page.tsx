@@ -3,48 +3,27 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
 export const metadata = {
-  title: "Diagnostic Services & Health Packages | SBR Diagnostic Center",
-  description: "Explore our comprehensive list of diagnostic services including lab tests, radiology, ultrasound, ECG, and home sample collection at affordable prices in Peerzadiguda, Hyderabad.",
+  title: "Our Services | Root's the Family Salon",
+  description: "Explore our premium unisex beauty services including hair styling, advanced facials, bridal HD makeup, nail art, and grooming in Peerzadiguda.",
 };
 
 export default function ServicesPage() {
-  // Generate MedicalClinic Structured Data with specific MedicalTests
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    "name": "SBR Diagnostic Center",
-    "image": "https://sbrdiagnosticcenter.com/logo.png",
+    "@type": "HealthAndBeautyBusiness",
+    "name": "Root's the Family Salon",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Sri Krishna Nagar Colony Road No. 2, near Renuka Yellamma Temple, Viharika Colony, Maruthi Nagar",
+      "streetAddress": "H No. 10-25/7, Taj Mahal Colony",
       "addressLocality": "Peerzadiguda, Hyderabad",
       "addressRegion": "Telangana",
       "postalCode": "500098",
       "addressCountry": "IN"
-    },
-    "telephone": "+919849190189",
-    "availableService": [
-      {
-        "@type": "MedicalTest",
-        "name": "Complete Blood Count (CBC)",
-      },
-      {
-         "@type": "MedicalTest",
-         "name": "Lipid Profile",
-      },
-      {
-         "@type": "MedicalTest",
-         "name": "Digital X-Ray",
-      },
-      {
-         "@type": "MedicalTest",
-         "name": "Ultrasound (USG)",
-      }
-    ]
+    }
   };
 
   return (
-    <div className="w-full bg-slate-50 min-h-screen">
+    <div className="w-full bg-salon-black min-h-screen text-salon-cream">
       {/* Schema injected for SEO */}
       <script
         type="application/ld+json"
@@ -52,26 +31,27 @@ export default function ServicesPage() {
       />
       
       {/* Page Hero Section */}
-      <section className="bg-medical-blue pt-12 pb-20 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full opacity-10 bg-[url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center"></div>
-        <div className="container mx-auto px-4 relative z-10">
+      <section className="bg-[#0D0D1A] pt-28 pb-12 md:pb-20 relative overflow-hidden border-b border-salon-gold/20">
+        <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-salon-black to-transparent"></div>
+        <div className="container mx-auto px-4 relative z-10 text-center">
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-sm text-blue-200 mb-6 font-medium">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+          <div className="flex items-center justify-center gap-2 text-sm text-salon-muted mb-6 font-medium tracking-widest uppercase">
+            <Link href="/" className="hover:text-salon-gold transition-colors">Home</Link>
             <ChevronRight className="w-4 h-4" />
-            <span className="text-white">Services</span>
+            <span className="text-salon-gold">Services</span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Our Diagnostic Services</h1>
-          <p className="text-lg text-blue-100 max-w-2xl">
-            From routine blood tests to advanced imaging — all under one roof at affordable prices.
+          <h1 className="text-4xl md:text-6xl font-heading text-salon-gold mb-4 md:mb-6">Our Services</h1>
+          <p className="text-base md:text-lg text-salon-muted max-w-2xl mx-auto font-light tracking-wide px-4">
+            Discover a touch of luxury. From precision cuts and glowing skin to your grand bridal day, we pamper your entire family.
           </p>
         </div>
       </section>
 
       {/* Main Tabs Component */}
-      <div className="-mt-10">
-        <ServicesClient />
+      <div className="mt-0 md:-mt-8">
+         <ServicesClient />
       </div>
     </div>
   );

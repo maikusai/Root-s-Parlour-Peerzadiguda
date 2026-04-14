@@ -11,14 +11,26 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        medical: {
-          blue: "#0a3d62",
-          light: "#1e6899",
-        },
-        accent: {
-          green: "#27ae60",
+        "salon-black": "#0D0D1A",
+        "salon-surface": "#1A1A2E",
+        "salon-gold": "#C9A84C",
+        "salon-gold-light": "#E8D5A3",
+        "salon-cream": "#F5F0E8",
+        "salon-muted": "#A89F8C",
+      },
+      fontFamily: {
+        heading: ["Playfair Display", "serif"],
+        body: ["Inter", "sans-serif"],
+      },
+      keyframes: {
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-20px)" },
         }
       },
+      animation: {
+        float: "float 8s ease-in-out infinite",
+      }
     },
   },
   plugins: [],

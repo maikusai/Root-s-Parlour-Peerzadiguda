@@ -2,14 +2,17 @@
 
 import { useEffect, useState, useRef } from "react";
 
-interface CounterProps {
-  end: number;
-  duration?: number;
-  suffix?: string;
+interface CounterStat {
+  value: number;
   label: string;
+  suffix: string;
 }
 
-function Counter({ end, duration = 2000, suffix = "", label }: CounterProps) {
+interface AnimatedCountersProps {
+  stats: CounterStat[];
+}
+
+function Counter({ end, duration = 2000, suffix = "", label }: { end: number, duration?: number, suffix?: string, label: string }) {
   const [count, setCount] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
   const countRef = useRef<HTMLDivElement>(null);
@@ -42,24 +45,27 @@ function Counter({ end, duration = 2000, suffix = "", label }: CounterProps) {
   }, [end, duration, hasAnimated]);
 
   return (
-    <div ref={countRef} className="flex flex-col items-center justify-center p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-      <div className="text-4xl md:text-5xl font-bold text-medical-blue mb-2">
+    <div ref={countRef} className="flex flex-col items-center justify-center p-6 bg-transparent rounded-sm hover:-translate-y-1 transition-transform duration-300">
+      <div className="text-4xl md:text-6xl font-heading text-salon-gold mb-3 drop-shadow-md">
         {count.toLocaleString()}{suffix}
       </div>
-      <div className="text-sm md:text-base text-slate-600 font-medium uppercase tracking-wide text-center">
+      <div className="text-xs md:text-sm text-salon-cream uppercase tracking-widest text-center font-semibold">
         {label}
       </div>
     </div>
   );
 }
 
-export default function AnimatedCounters() {
+export default function AnimatedCounters({ stats }: AnimatedCountersProps) {
+  if (!stats) return null;
+
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-      <Counter end={10000} suffix="+" label="Tests Done" />
-      <Counter end={5000} suffix="+" label="Happy Patients" />
-      <Counter end={15} suffix="+" label="Years Experience" />
-      <Counter end={99} suffix="%" label="Report Accuracy" />
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 divide-y md:divide-y-0 md:divide-x divide-salon-gold/10">
+      {stats.map((stat, idx) => (
+        <div key={idx} className={idx > 1 ? "pt-8 md:pt-0" : ""}>
+          <Counter end={stat.value} suffix={stat.suffix} label={stat.label} />
+        </div>
+      ))}
     </div>
   );
 }

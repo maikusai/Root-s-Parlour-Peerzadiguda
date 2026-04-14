@@ -1,184 +1,108 @@
 "use client";
 
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { Star, CheckCircle2, MessageSquare } from "lucide-react";
-import toast, { Toaster } from "react-hot-toast";
+import { Star, CheckCircle2, MessageSquare, ExternalLink } from "lucide-react";
+import ScrollReveal from "@/components/ScrollReveal";
 
-// MOCK DATA: Simulating reviews fetched from DB/Google
 const allReviews = [
-  { id: 1, name: "Rahul S.", rating: 5, date: "2 weeks ago", text: "Very professional staff. Reports were delivered on time and the doctor explained everything clearly. Prices are very reasonable.", verified: true },
-  { id: 2, name: "Sneha M.", rating: 5, date: "1 month ago", text: "Clean lab, quick service. Booked online and had no waiting time. Will definitely come back.", verified: true },
-  { id: 3, name: "Venkat R.", rating: 5, date: "1 month ago", text: "Best diagnostic center in Peerzadiguda. Home collection was prompt and the phlebotomist was very gentle.", verified: true },
-  { id: 4, name: "Priya P.", rating: 4, date: "2 months ago", text: "Good experience overall. The staff is cooperative and the reports are accurate.", verified: true },
-  { id: 5, name: "Arjun K.", rating: 5, date: "3 months ago", text: "They have all the advanced equipment. Got my parents full body checkup done here. Highly recommended.", verified: true },
-  { id: 6, name: "Anjali T.", rating: 5, date: "3 months ago", text: "Very hygienic and well maintained. Walked in for a blood test and was done in 10 minutes.", verified: true },
-  { id: 7, name: "Mohan D.", rating: 4, date: "4 months ago", text: "Reliable reports and decent pricing for the health packages. Could improve the waiting area seating slightly.", verified: true },
-  { id: 8, name: "Kavya J.", rating: 5, date: "5 months ago", text: "Exceptional service! The home collection person arrived exactly on time at 7 AM.", verified: true },
-  { id: 9, name: "Vijay C.", rating: 5, date: "6 months ago", text: "Trustworthy clinic right in our neighborhood. The doctor's consultation on the reports was very helpful.", verified: true },
-  { id: 10, name: "Rohit N.", rating: 5, date: "6 months ago", text: "Fast and efficient. Received my digital reports via WhatsApp within 6 hours.", verified: true },
-  { id: 11, name: "Nisha V.", rating: 4, date: "8 months ago", text: "Very friendly and professional reception staff. Tests are conducted smoothly.", verified: true },
-  { id: 12, name: "Suresh P.", rating: 5, date: "1 year ago", text: "Have been visiting SBR for 5 years now for regular checkups. Never disappointed with their service.", verified: true },
+  { id: 1, name: "Sneha Reddy", category: "Hair", rating: 5, date: "2 weeks ago", text: "Got advanced hair straightening done here. The results are incredibly sleek and the stylist explained the aftercare perfectly. Extremely happy with the premium products used.", verified: true },
+  { id: 2, name: "Rajesh K.", category: "Grooming", rating: 5, date: "1 month ago", text: "Got an amazing tattoo here. The artist was very hygienic, sterile equipment, and the detailing is perfect. Highly recommend their studio work.", verified: true },
+  { id: 3, name: "Priya Sharma", category: "Skin", rating: 4, date: "1 month ago", text: "The gold hydrating facial gave me an instant glow before my friend's wedding. The esthetician was very gentle. Just deduct one star because I had to wait 10 mins.", verified: true },
+  { id: 4, name: "Anjali T.", category: "Bridal", rating: 5, date: "2 months ago", text: "Booked them for my bridal makeup. They gave me the flawless HD look I wanted without making it look cakey. The entire team was professional and made me feel like a queen.", verified: true },
+  { id: 5, name: "Varun D.", category: "Hair", rating: 5, date: "3 months ago", text: "Best men's haircut in Peerzadiguda. True to their word, very expert hands. The salon vibe is luxurious and they really take their time.", verified: true },
+  { id: 6, name: "Neha Menon", category: "Skin", rating: 5, date: "4 months ago", text: "I regularly come here for my body polish and cleanups. The standard of hygiene and premium products used unmatched in this area.", verified: true },
+  { id: 7, name: "Swathi P.", category: "Bridal", rating: 5, date: "5 months ago", text: "Their pre-bridal skin package transformed my skin completely. I felt completely relaxed and ready for my big day. Super professional behavior.", verified: true },
+  { id: 8, name: "Arjun S.", category: "Grooming", rating: 4, date: "6 months ago", text: "Very premium service for men's facial and beard styling. The vibe is relaxing and completely dark themed which I love.", verified: true },
+  { id: 9, name: "Kavya J.", category: "Hair", rating: 5, date: "7 months ago", text: "My layered haircut with blowdry turned out phenomenonal. It's truly a luxury experience at an affordable price.", verified: true },
 ];
 
-type ReviewFormData = {
-  name: string;
-  rating: number;
-  text: string;
-};
-
 export default function ReviewsClient() {
-  const [visibleCount, setVisibleCount] = useState(9);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [ratingHover, setRatingHover] = useState(0);
+  const [activeTab, setActiveTab] = useState("All");
   
-  const { register, handleSubmit, setValue, watch, formState: { errors }, reset } = useForm<ReviewFormData>({
-    defaultValues: { rating: 0, text: "", name: "" }
-  });
+  const tabs = ["All", "Hair", "Skin", "Bridal", "Grooming"];
   
-  const currentRating = watch("rating");
-
-  const loadMore = () => {
-    setVisibleCount(prev => Math.min(prev + 6, allReviews.length));
-  };
-
-  const onSubmit = async (data: ReviewFormData) => {
-    if (data.rating === 0) {
-      toast.error("Please select a star rating!");
-      return;
-    }
-    
-    setIsSubmitting(true);
-    // Simulate API call to save review for moderation
-    setTimeout(() => {
-      toast.success("Thank you! Your review has been submitted to admin for moderation.", {
-        duration: 5000,
-        position: 'top-center',
-        style: { background: '#27ae60', color: '#fff', fontWeight: 'bold' }
-      });
-      reset();
-      setRatingHover(0);
-      setIsSubmitting(false);
-    }, 1500);
-  };
+  const filteredReviews = activeTab === "All" 
+    ? allReviews 
+    : allReviews.filter(r => r.category === activeTab);
 
   return (
     <div className="flex flex-col gap-16">
       
-      {/* Review Cards Grid */}
-      <div className="w-full">
-         <h2 className="text-3xl font-bold text-medical-blue mb-8 text-center md:text-left">Patient Experiences</h2>
-         
-         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-           {allReviews.slice(0, visibleCount).map((review) => (
-             <div key={review.id} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col h-full hover:shadow-md transition-shadow">
-               <div className="flex justify-between items-start mb-4">
-                 <div className="flex flex-col">
-                   <span className="font-bold text-slate-800">{review.name}</span>
-                   <span className="text-xs text-slate-500 mt-0.5">{review.date}</span>
-                 </div>
-                 {review.verified && (
-                   <span className="inline-flex items-center gap-1 bg-green-50 text-accent-green text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">
-                     <CheckCircle2 className="w-3 h-3" /> Verified
-                   </span>
-                 )}
-               </div>
-               
-               <div className="flex gap-1 mb-3">
-                 {[...Array(5)].map((_, i) => (
-                   <Star key={i} className={`w-4 h-4 ${i < review.rating ? 'fill-yellow-400 text-yellow-400' : 'fill-slate-100 text-slate-200'}`} />
-                 ))}
-               </div>
-               
-               <p className="text-slate-600 text-sm leading-relaxed flex-grow">&quot;{review.text}&quot;</p>
-             </div>
-           ))}
-         </div>
-         
-         {visibleCount < allReviews.length && (
-           <div className="flex justify-center mt-10">
-             <button onClick={loadMore} className="bg-white border-2 border-slate-200 text-slate-700 font-bold py-3 px-8 rounded-full hover:border-medical-blue hover:text-medical-blue transition-colors">
-               Load More Reviews
-             </button>
-           </div>
-         )}
-      </div>
-
-      <div className="w-full h-px bg-slate-200"></div>
-
-      {/* Submit Your Review Form */}
-      <div className="w-full max-w-2xl mx-auto bg-white rounded-2xl p-8 md:p-10 shadow-lg border border-slate-100">
-         <Toaster />
-         <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-blue-50 text-medical-blue rounded-full flex items-center justify-center mx-auto mb-4">
-               <MessageSquare className="w-8 h-8" />
-            </div>
-            <h2 className="text-2xl font-bold text-slate-800 mb-2">Share Your Experience</h2>
-            <p className="text-slate-500 text-sm">Your feedback helps us improve and helps others make informed health decisions.</p>
-         </div>
-
-         {/* Redirect to Google Button */}
-         <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="w-full mb-8 flex justify-center items-center gap-2 border-2 border-[#4285F4] bg-[#4285F4]/5 text-[#4285F4] font-bold py-3.5 rounded-xl hover:bg-[#4285F4] hover:text-white transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27c3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10c5.35 0 9.25-3.67 9.25-9.09c0-1.15-.15-1.81-.15-1.81Z"/></svg>
-            Leave a Google Review
-         </a>
-
-         <div className="flex items-center gap-4 mb-8">
-            <div className="flex-1 h-px bg-slate-200"></div>
-            <span className="text-slate-400 text-sm font-medium">OR SUBMIT DIRECTLY</span>
-            <div className="flex-1 h-px bg-slate-200"></div>
-         </div>
-
-         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-           <div className="space-y-2">
-              <label className="text-sm font-semibold text-slate-700 block text-center">Your Rating <span className="text-red-500">*</span></label>
-              <div className="flex justify-center gap-2" onMouseLeave={() => setRatingHover(0)}>
-                 {[1, 2, 3, 4, 5].map((star) => (
-                    <button
-                       key={star}
-                       type="button"
-                       onMouseEnter={() => setRatingHover(star)}
-                       onClick={() => setValue("rating", star)}
-                       className="focus:outline-none focus:scale-110 transition-transform"
-                    >
-                       <Star className={`w-10 h-10 transition-colors ${(ratingHover || currentRating) >= star ? 'fill-yellow-400 text-yellow-400' : 'fill-slate-100 text-slate-200'}`} />
-                    </button>
-                 ))}
-               </div>
-           </div>
-
-           <div className="space-y-1.5">
-             <label className="text-sm font-semibold text-slate-700">Name <span className="text-red-500">*</span></label>
-             <input 
-               {...register("name", { required: "Name is required" })}
-               className="w-full p-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-medical-blue outline-none transition-all"
-               placeholder="First Name + Last Initial (e.g. John D.)"
-             />
-             {errors.name && <p className="text-red-500 text-xs">{errors.name.message}</p>}
-           </div>
-
-           <div className="space-y-1.5">
-             <label className="text-sm font-semibold text-slate-700">Review <span className="text-red-500">*</span></label>
-             <textarea 
-               {...register("text", { required: "Please write your review" })}
-               rows={4}
-               className="w-full p-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-medical-blue outline-none transition-all resize-none"
-               placeholder="How was your experience?"
-             />
-             {errors.text && <p className="text-red-500 text-xs">{errors.text.message}</p>}
-           </div>
-
-           <button 
-             type="submit"
-             disabled={isSubmitting}
-             className="w-full bg-medical-blue text-white font-bold py-4 rounded-xl shadow-md hover:bg-medical-light transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+      {/* Filters */}
+      <div className="flex flex-wrap items-center justify-center gap-3">
+         {tabs.map((tab) => (
+           <button
+             key={tab}
+             onClick={() => setActiveTab(tab)}
+             className={`px-6 py-2 rounded-sm text-xs uppercase tracking-widest font-bold transition-all ${
+               activeTab === tab 
+                 ? "bg-salon-gold text-salon-black shadow-[0_0_15px_rgba(201,168,76,0.4)] border border-salon-gold" 
+                 : "bg-transparent text-salon-muted border border-salon-gold/20 hover:border-salon-gold hover:text-salon-gold"
+             }`}
            >
-             {isSubmitting ? 'Submitting...' : 'Submit Review'}
+             {tab}
            </button>
-           <p className="text-center text-xs text-slate-400 mt-4">Submitted reviews appear publicly after moderation.</p>
-         </form>
+         ))}
       </div>
 
+      {/* Review Cards Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {filteredReviews.map((review, idx) => (
+          <ScrollReveal key={review.id} delay={idx * 0.1}>
+            <div className="bg-salon-surface p-8 border border-salon-gold/20 rounded-sm flex flex-col h-full hover:border-salon-gold/50 hover:-translate-y-1 transition-all shadow-xl group relative">
+              
+              <div className="absolute top-0 right-8 px-3 py-1 bg-salon-black border-b border-l border-r border-salon-gold/20 text-salon-gold text-[10px] uppercase tracking-widest font-bold rounded-b-sm group-hover:bg-salon-gold group-hover:text-salon-black transition-colors">
+                 {review.category}
+              </div>
+
+              <div className="flex gap-1 mb-6 mt-2">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className={`w-4 h-4 ${i < review.rating ? 'fill-salon-gold text-salon-gold' : 'fill-salon-black text-salon-black border border-salon-gold/20 leading-none'}`} />
+                ))}
+              </div>
+              
+              <p className="text-salon-cream font-light text-sm leading-relaxed mb-8 flex-grow italic">
+                "{review.text}"
+              </p>
+
+              <div className="flex justify-between items-end border-t border-salon-gold/10 pt-4">
+                <div className="flex flex-col">
+                  <span className="font-heading text-lg text-salon-gold">{review.name}</span>
+                  <span className="text-xs text-salon-muted uppercase tracking-widest">{review.date}</span>
+                </div>
+                {review.verified && (
+                  <span className="text-[10px] text-green-500 font-bold uppercase tracking-wider flex items-center gap-1">
+                    <CheckCircle2 className="w-3 h-3" /> Verified
+                  </span>
+                )}
+              </div>
+            </div>
+          </ScrollReveal>
+        ))}
+      </div>
+
+      {/* Leave a Review Section */}
+      <div className="w-full max-w-3xl mx-auto bg-[#0D0D1A] border border-salon-gold/30 rounded-sm p-10 md:p-14 text-center mt-12 relative overflow-hidden group">
+         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-salon-gold/5 w-full h-full pointer-events-none group-hover:scale-110 transition-transform duration-700">
+           <MessageSquare className="w-full h-full object-cover" />
+         </div>
+
+         <div className="relative z-10">
+            <h2 className="text-3xl font-heading text-salon-gold mb-3">Leave a Review</h2>
+            <p className="text-salon-cream font-light text-sm mb-10 max-w-md mx-auto">
+               Loved your transformation? We'd be honored if you shared your experience with the world.
+            </p>
+
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+               <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-salon-surface border border-salon-gold/30 text-salon-cream font-bold py-4 px-8 rounded-sm hover:bg-salon-gold hover:text-salon-black transition-colors uppercase tracking-widest text-[10px] md:text-xs">
+                  Review on Google <ExternalLink className="w-3 h-3 md:w-4 md:h-4" />
+               </a>
+               <a href="https://justdial.com" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-[#F66B0E] border border-[#F66B0E] text-white font-bold py-4 px-8 rounded-sm hover:bg-[#e05b05] transition-colors uppercase tracking-widest text-[10px] md:text-xs">
+                  Review on JustDial <ExternalLink className="w-3 h-3 md:w-4 md:h-4" />
+               </a>
+            </div>
+         </div>
+      </div>
     </div>
   );
 }

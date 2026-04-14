@@ -1,223 +1,147 @@
 import Link from "next/link";
-import Image from "next/image";
-import { ChevronRight, Target, HeartHandshake, ShieldCheck, CheckCircle2 } from "lucide-react";
-import AnimatedCounters from "@/components/AnimatedCounters";
+import { ChevronRight, Heart, Sparkles, Shield } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata = {
-  title: "About Us | SBR Diagnostic Center",
-  description: "Learn about the mission, team, and state-of-the-art facilities at SBR Diagnostic Center, Peerzadiguda's trusted path lab.",
+  title: "About Us | Root's the Family Salon",
+  description: "Learn about the mission, team, and story behind Root's the Family Salon, Peerzadiguda's most trusted luxury unisex family salon.",
 };
 
 export default function AboutPage() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    "name": "SBR Diagnostic Center",
-    "description": "SBR Diagnostic Center provides accurate, affordable diagnostic tests in Peerzadiguda.",
-    "foundingDate": "2009",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Sri Krishna Nagar Colony Road No. 2, near Renuka Yellamma Temple, Viharika Colony, Maruthi Nagar",
-      "addressLocality": "Peerzadiguda, Hyderabad",
-      "addressRegion": "Telangana",
-      "postalCode": "500098",
-      "addressCountry": "IN"
-    }
-  };
-
   const team = [
-    { name: "Dr. Rajesh Kumar", role: "Head Pathologist", qual: "MD Pathology", experience: "15+ Years Experience", img: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=400&h=400&auto=format&fit=crop" },
-    { name: "Dr. Anita Sharma", role: "Radiologist", qual: "MD Radiology", experience: "12+ Years Experience", img: "https://images.unsplash.com/photo-1594824436998-d4032d88bbac?q=80&w=400&h=400&auto=format&fit=crop" },
-    { name: "K. Venkat", role: "Senior Lab Technician", qual: "B.Sc MLT", experience: "8+ Years Experience", img: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=400&h=400&auto=format&fit=crop" },
-    { name: "S. Priya", role: "Phlebotomist", qual: "DMLT", experience: "5+ Years Experience", img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=400&h=400&auto=format&fit=crop" },
+    { name: "Rahul Varma", role: "Creative Director", specialty: "Bridal Styling" },
+    { name: "Aisha Khan", role: "Senior Stylist", specialty: "Color & Highlights" },
+    { name: "Sneha Reddy", role: "Esthetician", specialty: "Advanced Skincare" },
+    { name: "Vikram Singh", role: "Master Barber", specialty: "Men's Grooming" },
   ];
 
-  const photos = [
-    { url: "https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?q=80&w=800&auto=format&fit=crop", caption: "Advanced Lab Equipment" },
-    { url: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=800&auto=format&fit=crop", caption: "Clean Waiting Area" },
-    { url: "https://images.unsplash.com/photo-1631815587646-b85a1bb02246?q=80&w=500&auto=format&fit=crop", caption: "Microscopy & Analysis" },
-    { url: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=500&auto=format&fit=crop", caption: "Sample Collection Room" },
-    { url: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop", caption: "Patient Reception" },
+  const milestones = [
+    { year: "2018", title: "Founded", desc: "Started our journey in Peerzadiguda." },
+    { year: "2020", title: "500 Clients", desc: "Grew a stable, loyal client base." },
+    { year: "2022", title: "1000 Clients", desc: "Expanded our luxury service menu." },
+    { year: "2024", title: "Top Rated", desc: "Rated #1 family salon in the area." },
   ];
 
   return (
-    <div className="w-full bg-slate-50 min-h-screen">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      
-      {/* Page Hero */}
-      <section className="bg-medical-blue pt-12 pb-20 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-gradient-to-r from-medical-blue to-accent-green mix-blend-overlay"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="flex items-center gap-2 text-sm text-blue-200 mb-6 font-medium">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <ChevronRight className="w-4 h-4" />
-            <span className="text-white">About Us</span>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">About SBR Diagnostic Center</h1>
-          <p className="text-lg text-blue-100 max-w-2xl">
-            Established with a vision to provide world-class diagnostics at neighborhood prices.
-          </p>
-        </div>
-      </section>
-
-      {/* Our Story */}
-      <section className="py-16 bg-white">
-        <ScrollReveal>
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            {/* Section heading */}
-            <div className="flex flex-col items-center text-center mb-10">
-              <div className="w-12 h-1 bg-medical-blue rounded-full mb-4"></div>
-              <h2 className="text-3xl font-bold text-medical-blue">Our Story</h2>
-              <p className="text-slate-500 mt-2 text-sm uppercase tracking-widest font-medium">Serving Peerzadiguda since 2009</p>
+    <div className="w-full bg-salon-black min-h-screen pb-24 text-salon-cream overflow-hidden">
+      {/* Hero */}
+      <section className="bg-[#0D0D1A] pt-28 pb-12 md:pb-32 relative border-b border-salon-gold/20">
+         <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center"></div>
+         <div className="absolute inset-0 bg-gradient-to-t from-salon-black to-transparent"></div>
+         <div className="container mx-auto px-4 relative z-10 flex flex-col items-center text-center">
+            
+            <div className="flex items-center gap-2 text-sm text-salon-muted mb-6 font-medium tracking-widest uppercase">
+               <Link href="/" className="hover:text-salon-gold transition-colors">Home</Link>
+               <ChevronRight className="w-4 h-4" />
+               <span className="text-salon-gold">About Us</span>
             </div>
-
-            {/* Story cards - mobile friendly grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-slate-50 border border-slate-100 rounded-2xl p-6 flex flex-col gap-3">
-                <div className="w-10 h-10 rounded-full bg-medical-blue/10 flex items-center justify-center mb-1">
-                  <span className="text-xl">🏥</span>
-                </div>
-                <h3 className="font-bold text-slate-800 text-lg">Who We Are</h3>
-                <p className="text-slate-600 leading-relaxed text-sm">
-                  SBR Diagnostic Center has been proudly serving the residents of Peerzadiguda, Maruthi Nagar, and Viharika Colony for over 15 years — becoming a trusted name for accurate, affordable healthcare diagnostics.
-                </p>
-              </div>
-              <div className="bg-slate-50 border border-slate-100 rounded-2xl p-6 flex flex-col gap-3">
-                <div className="w-10 h-10 rounded-full bg-accent-green/10 flex items-center justify-center mb-1">
-                  <span className="text-xl">🎯</span>
-                </div>
-                <h3 className="font-bold text-slate-800 text-lg">Our Mission</h3>
-                <p className="text-slate-600 leading-relaxed text-sm">
-                  Our mission is clear: bring world-class diagnostic precision to every neighbourhood household. We continuously invest in cutting-edge equipment and a highly trained medical staff so that critical health decisions start with precise results.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        </ScrollReveal>
-      </section>
-
-      {/* Our Mission & Values */}
-      <section className="py-16 bg-slate-50 border-y border-slate-200">
-        <ScrollReveal delay={0.2}>
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-medical-blue">Our Mission & Values</h2>
-            <p className="text-slate-500 mt-2">The pillars that uphold our standard of care</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow text-center">
-              <div className="w-16 h-16 mx-auto bg-blue-50 text-medical-blue rounded-2xl flex items-center justify-center mb-6">
-                <Target className="w-8 h-8" />
-              </div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">Accuracy</h3>
-              <p className="text-slate-600 text-sm">We maintain rigorous quality control using fully automated machines to ensure zero errors in your medical reports.</p>
-            </div>
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow text-center">
-              <div className="w-16 h-16 mx-auto bg-green-50 text-accent-green rounded-2xl flex items-center justify-center mb-6">
-                <ShieldCheck className="w-8 h-8" />
-              </div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">Affordability</h3>
-              <p className="text-slate-600 text-sm">Top-tier medical diagnostics shouldn&apos;t break the bank. Pricing is transparent, accessible, and neighborhood-first.</p>
-            </div>
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow text-center">
-              <div className="w-16 h-16 mx-auto bg-pink-50 text-pink-500 rounded-2xl flex items-center justify-center mb-6">
-                <HeartHandshake className="w-8 h-8" />
-              </div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">Compassion</h3>
-              <p className="text-slate-600 text-sm">From gentle sample collections to quick turnarounds, we handle every patient with the utmost care and empathy.</p>
-            </div>
-          </div>
-        </div>
-        </ScrollReveal>
-      </section>
-
-      {/* Certifications & Accreditations (Banner) */}
-      <section className="bg-medical-blue py-8 relative shadow-inner">
-         <div className="container mx-auto px-4">
-             <div className="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-16 text-white font-medium text-sm md:text-base">
-                 <div className="flex justify-center items-center gap-2">
-                     <CheckCircle2 className="w-6 h-6 text-accent-green" />
-                     <span>NABL Accredited Facility</span>
-                 </div>
-                 <div className="hidden md:block w-px h-8 bg-white/20"></div>
-                 <div className="flex justify-center items-center gap-2">
-                     <CheckCircle2 className="w-6 h-6 text-accent-green" />
-                     <span>ISO 9001:2015 Certified</span>
-                 </div>
-                 <div className="hidden md:block w-px h-8 bg-white/20"></div>
-                 <div className="flex justify-center items-center gap-2">
-                     <CheckCircle2 className="w-6 h-6 text-accent-green" />
-                     <span>Reg. by Telangana Health Dept.</span>
-                 </div>
-             </div>
+            
+            <h1 className="text-4xl md:text-7xl font-heading text-salon-gold mb-6 tracking-wide drop-shadow-2xl">
+               Our Story
+            </h1>
          </div>
       </section>
 
-      {/* Our Team */}
-      <section className="py-16 bg-white">
-        <ScrollReveal delay={0.1}>
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-medical-blue mb-4">Meet Our Team</h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">Expert diagnosis begins with exceptional minds. Our team comprises highly decorated doctors and dedicated technicians.</p>
-          </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {team.map((member, idx) => (
-              <div key={idx} className="group flex flex-col items-center">
-                <div className="w-40 h-40 rounded-full overflow-hidden mb-6 border-4 border-slate-100 group-hover:border-medical-light transition-colors relative shadow-sm">
-                  <Image src={member.img} alt={member.name} fill className="object-cover" sizes="(max-width: 768px) 160px, 160px" />
-                </div>
-                <h3 className="font-bold text-lg text-slate-800">{member.name}</h3>
-                <p className="text-medical-blue font-medium text-sm mb-1">{member.role} — {member.qual}</p>
-                <p className="text-slate-500 text-xs">{member.experience}</p>
+      <div className="container mx-auto px-4 -mt-8 md:-mt-16 relative z-20">
+         
+         {/* Story Section */}
+         <ScrollReveal delay={0.1}>
+            <div className="bg-salon-surface p-6 sm:p-10 md:p-16 border border-salon-gold/20 rounded-sm shadow-2xl max-w-4xl mx-auto text-center mb-16 md:mb-24 relative group">
+               <div className="absolute -top-10 -right-10 opacity-5 group-hover:scale-110 transition-transform duration-700">
+                  <Sparkles className="w-64 h-64 text-salon-gold" />
+               </div>
+               <h2 className="text-3xl font-heading text-salon-gold mb-8">The Beginning</h2>
+               <p className="text-base md:text-2xl text-salon-cream font-light leading-relaxed tracking-wide italic font-heading relative z-10 line-clamp-none">
+                 "Root's was born in 2018 in the heart of Peerzadiguda with a single mission: to bring premium salon services to every family in the neighbourhood. Over the years, we have served 1,500+ happy clients and grown into Hyderabad's most trusted unisex family salon."
+               </p>
+            </div>
+         </ScrollReveal>
+
+         {/* Values Section */}
+         <div className="mb-16 md:mb-24">
+            <div className="text-center mb-10 md:mb-16">
+               <h2 className="text-3xl lg:text-4xl font-heading text-salon-gold mb-4">Our Values</h2>
+               <p className="text-salon-muted font-light tracking-wide uppercase text-sm">What Drives Us Every Day</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+               <ScrollReveal delay={0.1}>
+                  <div className="bg-salon-surface p-10 border border-salon-gold/20 rounded-sm text-center flex flex-col items-center hover:-translate-y-2 transition-transform duration-300 shadow-xl">
+                     <Heart className="w-10 h-10 text-salon-gold mb-6" />
+                     <h3 className="text-xl font-heading text-salon-gold mb-3">Family First</h3>
+                     <p className="text-salon-muted text-sm font-light leading-relaxed">A completely inclusive, safe, and welcoming environment created specifically for all age groups and members of your family.</p>
+                  </div>
+               </ScrollReveal>
+               <ScrollReveal delay={0.2}>
+                  <div className="bg-salon-surface p-10 border border-salon-gold/20 rounded-sm text-center flex flex-col items-center hover:-translate-y-2 transition-transform duration-300 shadow-xl">
+                     <Sparkles className="w-10 h-10 text-salon-gold mb-6" />
+                     <h3 className="text-xl font-heading text-salon-gold mb-3">Expert Hands</h3>
+                     <p className="text-salon-muted text-sm font-light leading-relaxed">Highly trained, passionately creative professionals dedicated exclusively to bringing out your absolute best look.</p>
+                  </div>
+               </ScrollReveal>
+               <ScrollReveal delay={0.3}>
+                  <div className="bg-salon-surface p-10 border border-salon-gold/20 rounded-sm text-center flex flex-col items-center hover:-translate-y-2 transition-transform duration-300 shadow-xl">
+                     <Shield className="w-10 h-10 text-salon-gold mb-6" />
+                     <h3 className="text-xl font-heading text-salon-gold mb-3">Premium Products</h3>
+                     <p className="text-salon-muted text-sm font-light leading-relaxed">Zero compromises. We utilize only highly certified, internationally renowned brands for skin and hair care.</p>
+                  </div>
+               </ScrollReveal>
+            </div>
+         </div>
+
+         {/* Milestones Horizontal Timeline */}
+         <ScrollReveal delay={0.1}>
+           <div className="mb-16 md:mb-24 bg-[#0D0D1A] p-8 md:p-16 border border-salon-gold/20 rounded-sm shadow-2xl relative">
+              <h2 className="text-3xl lg:text-4xl font-heading text-salon-gold mb-10 md:mb-16 text-center">Our Journey</h2>
+              
+              <div className="flex flex-col lg:flex-row items-start justify-between relative">
+                 {/* Connecting Line (Desktop) */}
+                 <div className="hidden lg:block absolute top-[28px] left-20 right-20 h-px bg-salon-gold/20 z-0"></div>
+                 {/* Connecting Line (Mobile) */}
+                 <div className="block lg:hidden absolute left-[28px] top-6 bottom-6 w-px bg-salon-gold/20 z-0"></div>
+                 
+                 {milestones.map((ms, idx) => (
+                   <div key={idx} className="flex flex-row lg:flex-col lg:items-center relative z-10 mb-12 lg:mb-0 w-full lg:w-48 text-left lg:text-center group">
+                      <div className="w-14 h-14 shrink-0 bg-salon-surface border border-salon-gold flex items-center justify-center rounded-full mb-0 lg:mb-6 mx-0 lg:mx-auto mr-6 lg:mr-0 shadow-[0_0_15px_rgba(201,168,76,0.3)] group-hover:bg-salon-gold transition-colors duration-500">
+                         <span className="text-salon-gold group-hover:text-salon-black font-bold text-sm tracking-wider">{ms.year}</span>
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-heading text-salon-cream mb-2 pt-1 lg:pt-0">{ms.title}</h3>
+                        <p className="text-salon-muted text-sm font-light leading-relaxed pr-4 lg:pr-0">{ms.desc}</p>
+                      </div>
+                   </div>
+                 ))}
               </div>
-            ))}
-          </div>
+           </div>
+         </ScrollReveal>
 
-          <div className="mt-12 bg-slate-50 py-4 px-6 rounded-xl border border-slate-200 text-center inline-block w-full">
-             <p className="text-slate-700 text-sm font-medium">💡 <span className="font-bold">Did you know?</span> Ask us about our visiting specialist consultations to discuss your reports directly with experts.</p>
-          </div>
-        </div>
-        </ScrollReveal>
-      </section>
+         {/* Team Section */}
+         <div className="mb-10">
+            <div className="text-center mb-10 md:mb-16">
+               <h2 className="text-3xl lg:text-4xl font-heading text-salon-gold mb-4">Meet Our Stylists</h2>
+               <p className="text-salon-muted font-light tracking-wide uppercase text-sm">The artists behind the magic</p>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+               {team.map((member, idx) => (
+                 <ScrollReveal key={idx} delay={idx * 0.1}>
+                    <div className="bg-salon-surface border border-salon-gold/20 p-8 rounded-sm text-center flex flex-col items-center group shadow-xl hover:border-salon-gold/40 transition-colors">
+                       <div className="w-32 h-32 rounded-full overflow-hidden mb-6 border-2 border-salon-gold/30 group-hover:border-salon-gold transition-colors block p-1">
+                          <div className="w-full h-full rounded-full bg-salon-black flex items-center justify-center border border-salon-gold/10">
+                             <span className="text-salon-gold/30 uppercase tracking-widest text-[10px] text-center font-bold">Photo Pending</span>
+                          </div>
+                       </div>
+                       <h3 className="text-xl font-heading text-salon-cream mb-1">{member.name}</h3>
+                       <p className="text-salon-gold text-xs uppercase tracking-widest mb-4 font-bold">{member.role}</p>
+                       <p className="text-salon-muted font-light text-xs bg-salon-black px-4 py-2 rounded-sm border border-salon-gold/10 inline-block uppercase tracking-widest">
+                         {member.specialty}
+                       </p>
+                    </div>
+                 </ScrollReveal>
+               ))}
+            </div>
+         </div>
 
-      {/* By the Numbers (Animated Counters) */}
-      <section className="py-16 bg-slate-100 border-y border-slate-200 shadow-inner">
-        <div className="container mx-auto px-4">
-          <AnimatedCounters />
-        </div>
-      </section>
-
-      {/* Facility Photos (Masonry CSS Column-count) */}
-      <section className="py-16 bg-white">
-        <ScrollReveal delay={0.2}>
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-medical-blue mb-4">Our Facility</h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">Take a virtual tour of our clean, modern, and patient-friendly environment.</p>
-          </div>
-
-          <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-            {photos.map((photo, idx) => (
-              <div key={idx} className="break-inside-avoid rounded-2xl overflow-hidden group shadow-md hover:shadow-xl transition-shadow relative">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={photo.url} alt={photo.caption} loading="lazy" className="w-full h-auto object-cover block group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                  <p className="text-white font-bold p-6 w-full">{photo.caption}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        </ScrollReveal>
-      </section>
+      </div>
     </div>
   );
 }

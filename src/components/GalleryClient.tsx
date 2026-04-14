@@ -1,109 +1,188 @@
 "use client";
 
-import { useState } from "react";
-import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
-import Captions from "yet-another-react-lightbox/plugins/captions";
-import "yet-another-react-lightbox/plugins/captions.css";
+import { useState, useEffect } from "react";
+import { Scissors, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
-// MOCK DATA: Categorized Image Galleries
-const tabs = [
-  "Facility & Infrastructure",
-  "Equipment",
-  "Team",
-  "Health Camps / Events"
+const tabs = ["All", "Hair", "Skin", "Bridal", "Nails"];
+
+// MOCK DATA: 12 Placeholders
+const galleryData = [
+  { id: 1, category: "Hair", title: "Premium Balayage", color: "bg-amber-900" },
+  { id: 2, category: "Bridal", title: "HD Bridal Makeup", color: "bg-rose-950" },
+  { id: 3, category: "Nails", title: "Gel Nail Extensions", color: "bg-fuchsia-950" },
+  { id: 4, category: "Skin", title: "24k Gold Facial", color: "bg-yellow-950" },
+  { id: 5, category: "Hair", title: "Keratin Treatment", color: "bg-stone-900" },
+  { id: 6, category: "Skin", title: "Hydrating Facial", color: "bg-cyan-950" },
+  { id: 7, category: "Bridal", title: "Engagement Look", color: "bg-rose-900" },
+  { id: 8, category: "Nails", title: "Classic French Manicure", color: "bg-neutral-800" },
+  { id: 9, category: "Hair", title: "Advance Layer Cut", color: "bg-zinc-900" },
+  { id: 10, category: "Skin", title: "Full Body Polish", color: "bg-orange-950" },
+  { id: 11, category: "Bridal", title: "Airbrush Makeup", color: "bg-pink-950" },
+  { id: 12, category: "Hair", title: "Global Hair Color", color: "bg-red-950" },
 ];
 
-const galleryData: Record<string, { src: string; width: number; height: number; title: string; description: string }[]> = {
-  "Facility & Infrastructure": [
-    { src: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1000&auto=format&fit=crop", width: 1000, height: 667, title: "Waiting Area", description: "Spacious, air-conditioned seating." },
-    { src: "https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?q=80&w=1000&auto=format&fit=crop", width: 1000, height: 667, title: "Reception", description: "Quick registration desk for zero waiting." },
-    { src: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop", width: 800, height: 1200, title: "Sample Collection Room", description: "Hygienic and pristine sampling areas." },
-    { src: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1000&auto=format&fit=crop", width: 1000, height: 667, title: "NABL Lab", description: "Primary diagnostic testing area." }
-  ],
-  "Equipment": [
-    { src: "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?q=80&w=1000&auto=format&fit=crop", width: 1000, height: 667, title: "Ultrasound Machine", description: "High-resolution sonography equipment." },
-    { src: "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1000&auto=format&fit=crop", width: 1000, height: 667, title: "ECG Machine", description: "Advanced cardiovascular monitoring." },
-    { src: "https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=800&auto=format&fit=crop", width: 800, height: 1200, title: "Digital X-Ray", description: "Low radiation, fast imaging x-ray." },
-    { src: "https://images.unsplash.com/photo-1579684453423-f84349ef60b0?q=80&w=1000&auto=format&fit=crop", width: 1000, height: 667, title: "Hematology Analyzer", description: "Automated high-speed blood analyzer." },
-    { src: "https://images.unsplash.com/photo-1631558556392-5b9e078cb146?q=80&w=1000&auto=format&fit=crop", width: 1000, height: 667, title: "Biochemistry", description: "Fully automated biochemistry unit." }
-  ],
-  "Team": [
-    { src: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=1000&auto=format&fit=crop", width: 1000, height: 667, title: "Dr. Consultation", description: "Expert doctor reviewing patient history." },
-    { src: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=800&auto=format&fit=crop", width: 800, height: 1200, title: "Chief Pathologist", description: "Leading our lab diagnostics team." },
-    { src: "https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=1000&auto=format&fit=crop", width: 1000, height: 667, title: "Phlebotomist", description: "Painless sample collection specialist." }
-  ],
-  "Health Camps / Events": [
-    { src: "https://images.unsplash.com/photo-1576091160550-2173ff9e5eb3?q=80&w=1000&auto=format&fit=crop", width: 1000, height: 667, title: "Free Diabetic Camp", description: "Screened 100+ patients in Peerzadiguda." },
-    { src: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?q=80&w=1000&auto=format&fit=crop", width: 1000, height: 667, title: "Heart Checkup Drive", description: "Community ECG screening event." }
-  ]
-};
-
 export default function GalleryClient() {
-  const [activeTab, setActiveTab] = useState(tabs[0]);
-  const [index, setIndex] = useState(-1);
+  const [activeTab, setActiveTab] = useState("All");
+  const [selectedPhoto, setSelectedPhoto] = useState<any>(null);
+  const [direction, setDirection] = useState(0);
 
-  const currentPhotos = galleryData[activeTab] || [];
+  const filteredPhotos = activeTab === "All" ? galleryData : galleryData.filter(img => img.category === activeTab);
+
+  // Scroll Lock & Hide FABs when lightbox is open
+  useEffect(() => {
+    if (selectedPhoto) {
+      document.body.style.overflow = "hidden";
+      // Find FAB buttons and hide them completely so they don't bleed through
+      const fabLayers = document.querySelectorAll('.z-\\[85\\], .z-\\[90\\]');
+      fabLayers.forEach(el => (el as HTMLElement).style.display = 'none');
+    } else {
+      document.body.style.overflow = "";
+      const fabLayers = document.querySelectorAll('.z-\\[85\\], .z-\\[90\\]');
+      fabLayers.forEach(el => (el as HTMLElement).style.display = '');
+    }
+    return () => {
+      document.body.style.overflow = "";
+      const fabLayers = document.querySelectorAll('.z-\\[85\\], .z-\\[90\\]');
+      fabLayers.forEach(el => (el as HTMLElement).style.display = '');
+    };
+  }, [selectedPhoto]);
+
+  const handlePrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!selectedPhoto) return;
+    setDirection(-1);
+    const idx = filteredPhotos.findIndex(p => p.id === selectedPhoto.id);
+    if (idx > 0) setSelectedPhoto(filteredPhotos[idx - 1]);
+    else setSelectedPhoto(filteredPhotos[filteredPhotos.length - 1]); // wrap around
+  };
+
+  const handleNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!selectedPhoto) return;
+    setDirection(1);
+    const idx = filteredPhotos.findIndex(p => p.id === selectedPhoto.id);
+    if (idx < filteredPhotos.length - 1) setSelectedPhoto(filteredPhotos[idx + 1]);
+    else setSelectedPhoto(filteredPhotos[0]);
+  };
+
+  const variants = {
+    enter: (dir: number) => ({
+      x: dir > 0 ? "100%" : dir < 0 ? "-100%" : 0,
+      opacity: 0,
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+    },
+    exit: (dir: number) => ({
+      zIndex: 0,
+      x: dir < 0 ? "100%" : dir > 0 ? "-100%" : 0,
+      opacity: 0,
+    }),
+  };
 
   return (
-    <div className="w-full flex flex-col items-center">
-      
-      {/* Category Tabs */}
-      <div className="flex flex-wrap justify-center gap-2 mb-10 w-full">
-        {tabs.map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all ${
-              activeTab === tab 
-              ? "bg-medical-blue text-white shadow-md scale-105" 
-              : "bg-white text-slate-600 hover:bg-slate-100 hover:text-medical-light border border-slate-200"
-            }`}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
+    <div className="w-full flex justify-center flex-col items-center relative">
+       {/* Category Tabs */}
+       <div className="flex flex-wrap justify-center gap-4 mb-12 w-full">
+         {tabs.map((tab) => (
+           <button
+             key={tab}
+             onClick={() => setActiveTab(tab)}
+             className={`px-6 py-2 rounded-sm text-xs uppercase tracking-widest font-semibold transition-all border ${
+               activeTab === tab 
+               ? "bg-salon-gold border-salon-gold text-salon-black shadow-[0_0_15px_rgba(201,168,76,0.3)]" 
+               : "bg-transparent border-salon-gold/30 text-salon-cream hover:border-salon-gold hover:text-salon-gold"
+             }`}
+           >
+             {tab}
+           </button>
+         ))}
+       </div>
 
-      {/* CSS Masonry Photo Gallery */}
-      <div className="w-full min-h-[400px]">
-        {currentPhotos.length > 0 ? (
+       {/* CSS Masonry Grid */}
+       <div className="w-full min-h-[400px]">
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-            {currentPhotos.map((photo, i) => (
-              <div 
-                key={i} 
-                onClick={() => setIndex(i)}
-                className="break-inside-avoid rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all cursor-pointer group relative"
-              >
-                <img 
-                  src={photo.src} 
-                  alt={photo.title} 
-                  className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-500 ease-in-out" 
-                  loading="lazy" 
-                />
-                {/* Embedded Title Overlay on Hover */}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                   <p className="text-white font-bold tracking-wide drop-shadow-md">{photo.title}</p>
+             {filteredPhotos.map((photo) => (
+               <div 
+                 key={photo.id}
+                 onClick={() => setSelectedPhoto(photo)}
+                 className={`break-inside-avoid rounded-sm overflow-hidden border border-salon-gold/10 shadow-sm hover:shadow-[0_8px_30px_rgba(201,168,76,0.15)] hover:border-salon-gold/40 transition-all cursor-pointer group relative h-64 md:h-80 w-full flex items-center justify-center ${photo.color}`}
+               >
+                 {/* Placeholder Content */}
+                 <span className="text-salon-gold/20 font-heading text-4xl uppercase tracking-widest opacity-30 select-none rotate-[-45deg] whitespace-nowrap">ROOT'S</span>
+
+                 {/* Hover Overlay */}
+                 <div className="absolute inset-0 bg-gradient-to-t from-salon-black via-salon-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+                    <p className="text-salon-gold text-[10px] uppercase tracking-widest mb-1">{photo.category}</p>
+                    <p className="text-salon-cream font-heading text-xl">{photo.title}</p>
+                 </div>
+               </div>
+             ))}
+          </div>
+       </div>
+
+       {/* Custom Lightbox */}
+       {selectedPhoto && (
+         <div 
+           className="fixed inset-0 z-[999] flex items-center justify-center bg-salon-black/95 backdrop-blur-md p-4 transition-opacity animate-in fade-in duration-300"
+           onClick={() => setSelectedPhoto(null)}
+         >
+           <button 
+             className="absolute top-[85px] right-6 md:right-8 text-salon-gold hover:text-salon-cream transition-colors p-2 z-[60]"
+             onClick={() => setSelectedPhoto(null)}
+           >
+             <Scissors className="w-7 h-7" strokeWidth={1.5} />
+           </button>
+           
+           <div 
+             className="relative w-full max-w-4xl max-h-[80vh] flex flex-col items-center animate-in zoom-in-95 duration-300 mt-12 md:mt-6"
+             onClick={(e) => e.stopPropagation()}
+           >
+             <div className="w-full aspect-[4/3] rounded-sm shadow-2xl border border-salon-gold/20 relative overflow-hidden bg-salon-surface">
+               <AnimatePresence initial={false} custom={direction}>
+                 <motion.div
+                   key={selectedPhoto.id}
+                   custom={direction}
+                   variants={variants}
+                   initial="enter"
+                   animate="center"
+                   exit="exit"
+                   transition={{ x: { type: "spring", stiffness: 350, damping: 35 }, opacity: { duration: 0.2 } }}
+                   className={`absolute inset-0 flex items-center justify-center ${selectedPhoto.color}`}
+                 >
+                   <span className="text-salon-gold/20 font-heading text-6xl md:text-8xl uppercase tracking-widest select-none drop-shadow-2xl opacity-40 rotate-[-20deg]">ROOT'S SALON</span>
+                 </motion.div>
+               </AnimatePresence>
+             </div>
+             
+             <div className="w-full mt-6 text-center flex flex-col items-center">
+                <span className="inline-block px-3 py-1 border border-salon-gold/30 rounded-full text-salon-gold text-[10px] uppercase tracking-widest mb-3">
+                   {selectedPhoto.category}
+                </span>
+                <h3 className="text-3xl font-heading text-salon-cream mb-6">{selectedPhoto.title}</h3>
+                
+                {/* Navigation Buttons placed right below the text title */}
+                <div className="flex items-center gap-6 mt-2">
+                   <button 
+                     onClick={handlePrev} 
+                     className="p-3 border border-salon-gold text-salon-gold rounded-full hover:bg-salon-gold hover:text-salon-black transition-colors"
+                   >
+                     <ChevronLeft className="w-6 h-6" />
+                   </button>
+                   <button 
+                     onClick={handleNext} 
+                     className="p-3 border border-salon-gold text-salon-gold rounded-full hover:bg-salon-gold hover:text-salon-black transition-colors"
+                   >
+                     <ChevronRight className="w-6 h-6" />
+                   </button>
                 </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="w-full h-40 flex items-center justify-center text-slate-400">
-             No photos available yet.
-          </div>
-        )}
-      </div>
-
-      {/* Lightbox for zooming photos */}
-      <Lightbox
-        slides={currentPhotos}
-        open={index >= 0}
-        index={index}
-        close={() => setIndex(-1)}
-        plugins={[Captions]}
-      />
-
+             </div>
+           </div>
+         </div>
+       )}
     </div>
   );
 }

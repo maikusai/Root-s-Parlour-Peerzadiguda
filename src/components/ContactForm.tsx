@@ -32,7 +32,7 @@ export default function ContactForm() {
       toast.success("Message sent! We will get back to you shortly.", {
         duration: 5000,
         position: "top-center",
-        style: { background: "#27ae60", color: "#fff", fontWeight: "bold" },
+        style: { background: "#C9A84C", color: "#0D0D1A", fontWeight: "bold" },
       });
       reset();
     } catch (err: unknown) {
@@ -43,82 +43,72 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 md:space-y-6">
       <Toaster />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
         {/* Name */}
-        <div className="space-y-1.5">
-          <label className="text-sm font-semibold text-slate-700">
-            Full Name <span className="text-red-500">*</span>
+        <div className="space-y-1.5 md:space-y-2">
+          <label className="text-[9px] md:text-[10px] uppercase tracking-widest text-salon-muted font-semibold">
+            Full Name <span className="text-salon-gold">*</span>
           </label>
           <input
             {...register("name", { required: "Name is required" })}
-            className="w-full p-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-medical-blue outline-none transition-all text-sm"
+            className="w-full p-3 md:p-4 bg-salon-black border border-salon-gold/20 text-salon-cream focus:border-salon-gold outline-none transition-all rounded-sm text-sm"
             placeholder="Your name"
           />
-          {errors.name && <p className="text-red-500 text-xs">{errors.name.message}</p>}
+          {errors.name && <p className="text-red-400 text-xs">{errors.name.message}</p>}
         </div>
 
         {/* Phone */}
-        <div className="space-y-1.5">
-          <label className="text-sm font-semibold text-slate-700">
-            Phone Number <span className="text-red-500">*</span>
+        <div className="space-y-1.5 md:space-y-2">
+          <label className="text-[9px] md:text-[10px] uppercase tracking-widest text-salon-muted font-semibold">
+            Phone Number <span className="text-salon-gold">*</span>
           </label>
           <input
             {...register("phone", {
               required: "Phone is required",
               pattern: { value: /^[0-9]{10}$/, message: "Enter valid 10-digit number" },
             })}
-            className="w-full p-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-medical-blue outline-none transition-all text-sm"
+            className="w-full p-3 md:p-4 bg-salon-black border border-salon-gold/20 text-salon-cream focus:border-salon-gold outline-none transition-all rounded-sm text-sm"
             placeholder="10-digit mobile"
           />
-          {errors.phone && <p className="text-red-500 text-xs">{errors.phone.message}</p>}
+          {errors.phone && <p className="text-red-400 text-xs">{errors.phone.message}</p>}
         </div>
       </div>
 
       {/* Email */}
-      <div className="space-y-1.5">
-        <label className="text-sm font-semibold text-slate-700">
-          Email <span className="text-slate-400 font-normal">(Optional)</span>
+      <div className="space-y-1.5 md:space-y-2">
+        <label className="text-[9px] md:text-[10px] uppercase tracking-widest text-salon-muted font-semibold">
+          Email <span className="text-salon-gold/50 font-normal">(Optional)</span>
         </label>
         <input
           type="email"
           {...register("email")}
-          className="w-full p-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-medical-blue outline-none transition-all text-sm"
+          className="w-full p-3 md:p-4 bg-salon-black border border-salon-gold/20 text-salon-cream focus:border-salon-gold outline-none transition-all rounded-sm text-sm"
           placeholder="your@email.com"
         />
       </div>
 
       {/* Message */}
-      <div className="space-y-1.5">
-        <label className="text-sm font-semibold text-slate-700">
-          Message <span className="text-red-500">*</span>
+      <div className="space-y-1.5 md:space-y-2">
+        <label className="text-[9px] md:text-[10px] uppercase tracking-widest text-salon-muted font-semibold">
+          Message <span className="text-salon-gold">*</span>
         </label>
         <textarea
           {...register("message", { required: "Please enter your message" })}
           rows={4}
-          className="w-full p-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-medical-blue outline-none transition-all text-sm resize-none"
-          placeholder="Your question or message…"
+          className="w-full p-3 md:p-4 bg-salon-black border border-salon-gold/20 text-salon-cream focus:border-salon-gold outline-none transition-all rounded-sm text-sm resize-none"
+          placeholder="How can we help you?"
         />
-        {errors.message && <p className="text-red-500 text-xs">{errors.message.message}</p>}
+        {errors.message && <p className="text-red-400 text-xs">{errors.message.message}</p>}
       </div>
 
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-medical-blue text-white font-bold py-3.5 rounded-xl hover:bg-medical-light transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        className="w-full bg-salon-gold text-salon-black font-bold py-3.5 md:py-4 rounded-sm hover:bg-salon-gold-light transition-colors shadow-[0_0_15px_rgba(201,168,76,0.3)] disabled:opacity-70 disabled:cursor-not-allowed uppercase tracking-widest text-sm"
       >
-        {isSubmitting ? (
-          <>
-            <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-            </svg>
-            Sending…
-          </>
-        ) : (
-          "Send Message"
-        )}
+        {isSubmitting ? "Sending..." : "Send Message"}
       </button>
     </form>
   );
